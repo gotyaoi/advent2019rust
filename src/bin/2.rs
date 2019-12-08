@@ -1,10 +1,8 @@
 use std::fs;
 
 fn main() {
-    let contents = fs::read_to_string("../2.txt")
-        .expect("Something went wrong reading the file");
-
-    let mut instructions: Vec<i64> = contents.trim_end().split(',').map(|x| x.parse().unwrap()).collect();
+    let mut instructions: Vec<i64> = fs::read_to_string("../2.txt").unwrap()
+        .trim_end().split(',').map(|x| x.parse().unwrap()).collect();
 
     instructions[1] = 12;
     instructions[2] = 2;

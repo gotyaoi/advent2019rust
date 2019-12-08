@@ -1,10 +1,11 @@
-use std::fs;
+use std::io::{BufRead, BufReader};
+use std::fs::File;
 
 fn main() {
-    let contents = fs::read_to_string("../1.txt")
-        .expect("Something went wrong reading the file");
-
-    let mut masses: Vec<u64> = contents.split_whitespace().map(|x| x.parse().unwrap()).collect();
+    let mut masses: Vec<u64> = {
+        let reader = BufReader::new(File::open("../1.txt").unwrap());
+        reader.lines().map(|x| x.unwrap().parse().unwrap()).collect()
+    };
 
     println!("{}", masses.iter().map(|x| x/3-2).sum::<u64>());
 
