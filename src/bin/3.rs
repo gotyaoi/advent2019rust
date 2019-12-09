@@ -5,9 +5,9 @@ use std::fs::File;
 fn main() {
     let (wire1, wire2): (Vec<(char, u64)>, Vec<(char, u64)>) = {
         let reader = BufReader::new(File::open("../3.txt").unwrap());
-        let mut lines = reader.lines();
-        (lines.next().unwrap().unwrap().split(',').map(|y| {let mut chars = y.chars(); (chars.next().unwrap(), chars.as_str().parse().unwrap())}).collect(),
-         lines.next().unwrap().unwrap().split(',').map(|y| {let mut chars = y.chars(); (chars.next().unwrap(), chars.as_str().parse().unwrap())}).collect())
+        let mut lines = reader.lines().map(|x| x.unwrap());
+        (lines.next().unwrap().split(',').map(|y| {let mut chars = y.chars(); (chars.next().unwrap(), chars.as_str().parse().unwrap())}).collect(),
+         lines.next().unwrap().split(',').map(|y| {let mut chars = y.chars(); (chars.next().unwrap(), chars.as_str().parse().unwrap())}).collect())
     };
 
     let mut wire1_map: HashMap<(i64, i64), u64> = HashMap::new();
